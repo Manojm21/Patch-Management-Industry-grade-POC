@@ -1,0 +1,49 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+thead {
+  background-color: #3f51b5;
+  color: white;
+}
+
+th, td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+h2 {
+  margin-top: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+/* Optional: Color-code status */
+td:nth-child(4) {
+  font-weight: bold;
+}
+
+td:nth-child(4):contains("Applied") {
+  color: green;
+}
+
+td:nth-child(4):contains("Failed") {
+  color: red;
+}
+
+td:nth-child(4):contains("Pending") {
+  color: orange;
+}

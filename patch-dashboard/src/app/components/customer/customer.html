@@ -1,0 +1,278 @@
+<div class="customer-container">
+  <button (click)="toggleOptions()">Customer</button>
+
+  <div *ngIf="showOptions">
+    <button (click)="setView('display')">Display Customers</button>
+    <button (click)="setView('add')">Add Customer</button>
+  </div>
+
+  <!-- Display Customers List with Products -->
+  <div *ngIf="currentView === 'display' && !selectedCustomer">
+    <h2>Customer Agents</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Customer Name</th>
+          <th>Agent ID</th>
+          <th>Monitored Product(s)</th>
+          <th>Agent Version</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let customer of enrichedCustomers" (click)="viewDetails(customer)">
+          <td>{{ customer.customerName }}</td>
+          <td>{{ customer.agentId }}</td>
+          <td>
+            <ul>
+              <li *ngFor="let p of customer.monitoredProducts">
+                {{ p.monitoredProduct }} 
+              </li>
+            </ul>
+          </td>
+          <td>{{ customer.currentVersion }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Display Selected Customer Details -->
+  <div *ngIf="selectedCustomer">
+    <h2>Customer Details</h2>
+    <p><strong>Name:</strong> {{ selectedCustomer.customerName }}</p>
+    <p><strong>Agent ID:</strong> {{ selectedCustomer.agentId }}</p>
+    <div *ngIf="selectedCustomer.monitoredProducts.length > 0">
+      <h3>Monitored Products</h3>
+      <ul>
+        <li *ngFor="let product of selectedCustomer.monitoredProducts">
+          {{ product.monitoredProduct }} - Version: {{ product.currentVersion }}
+        </li>
+      </ul>
+    </div>
+    <button (click)="backToList()">Back to list</button>
+  </div>
+
+  <!-- Add Customer Form -->
+  <div *ngIf="currentView === 'add'">
+    <h2>Add Customer</h2>
+    <form (ngSubmit)="addCustomer()">
+      <!-- Customer Basic Info Section -->
+      <div class="form-section">
+        <h3>Customer Information</h3>
+        
+        <label for="agentId">
+          Agent ID:
+          <input 
+            id="agentId" 
+            [(ngModel)]="newCustomer.agentId" 
+            name="agentId" 
+            placeholder="Enter Agent ID (e.g., CustomerA-Agent01)"
+            required
+          >
+        </label>
+
+        <label for="customerName">
+          Customer Name:
+          <input 
+            id="customerName" 
+            [(ngModel)]="newCustomer.customerName" 
+            name="customerName" 
+            placeholder="Enter Customer Name"
+            required
+          >
+        </label>
+
+        <label for="currentVersion">
+          Agent Current Version:
+          <input 
+            id="currentVersion" 
+            [(ngModel)]="newCustomer.currentVersion" 
+            name="currentVersion" 
+            placeholder="Enter Current Version (e.g., 1.1.0)"
+            required
+          >
+        </label>
+      </div>
+
+      <!-- Monitored Products Section -->
+      <div class="form-section">
+        <h3>Monitored Products</h3>
+        <p class="section-description">Add the products that this customer's agent will monitor for updates:</p>
+        
+        <div class="products-container">
+          <div *ngFor="let product of monitoredProducts; let i = index" class="product-row">
+            <div class="product-fields">
+              <label [for]="'product-' + i">
+                Product Name:
+                <div class="product-input-group">
+                  <select 
+                    [id]="'product-' + i"
+                    [(ngModel)]="product.monitoredProduct"
+                    [name]="'monitoredProduct-' + i"
+                    [disabled]="product.useCustomProduct"
+                  >
+                    <option value="">Select a product...</option>
+                    <option *ngFor="let availableProduct of availableProducts" [value]="availableProduct">
+                      {{ availableProduct }}
+                    </option>
+                  </select>
+                  
+                  <div class="custom-product-toggle">
+                    <label [for]="'customToggle-' + i" class="checkbox-label">
+                      <input 
+                        [id]="'customToggle-' + i"
+                        type="checkbox" 
+                        [(ngModel)]="product.useCustomProduct"
+                        [name]="'useCustomProduct-' + i"
+                      >
+                      <span>Enter custom product</span>
+                    </label>
+                  </div>
+                </div>
+                
+                <!-- Custom product input field -->
+                <input 
+                  *ngIf="product.useCustomProduct"
+                  [id]="'customProduct-' + i"
+                  [(ngModel)]="product.monitoredProduct"
+                  [name]="'customProduct-' + i"
+                  placeholder="Enter custom product name"
+                  class="custom-product-input"
+                  required
+                >
+              </label>
+
+              <label [for]="'version-' + i">
+                Product Version:
+                <input 
+                  [id]="'version-' + i"
+                  [(ngModel)]="product.currentVersion"
+                  [name]="'currentVersion-' + i"
+                  placeholder="Enter version (e.g., 2.1.0)"
+                  required
+                >
+              </label>
+            </div>
+
+            <div class="product-actions">
+              <button 
+                type="button" 
+                class="remove-btn" 
+                (click)="removeProductField(i)"
+                [disabled]="monitoredProducts.length === 1"
+                title="Remove product"
+              >
+                ✖
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <button 
+          type="button" 
+          class="add-product-btn" 
+          (click)="addProductField()"
+        >
+          + Add Another Product
+        </button>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="form-actions">
+        <button type="submit" class="submit-btn">Add Customer</button>
+        <button type="button" class="cancel-btn" (click)="setView('display')">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+.product-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.custom-product-toggle {
+  margin-top: 8px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+  margin: 0;
+  width: auto;
+}
+
+.custom-product-input {
+  margin-top: 8px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.product-fields select:disabled {
+  background-color: #f5f5f5;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.product-row {
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 12px;
+  background-color: #fafafa;
+}
+
+.product-fields {
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  gap: 16px;
+  align-items: start;
+}
+
+.product-actions {
+  margin-top: 12px;
+  text-align: right;
+}
+
+.remove-btn {
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.remove-btn:hover:not(:disabled) {
+  background-color: #cc0000;
+}
+
+.remove-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.add-product-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 16px;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+.add-product-btn:hover {
+  background-color: #0056b3;
+}
+</style>

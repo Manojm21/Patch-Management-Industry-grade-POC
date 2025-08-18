@@ -1,0 +1,50 @@
+<div class="center-container">
+  <div class="card mt-4 status-card">
+    <div class="card-header status-header">
+      <h2 class="card-title status-title">Patch Status</h2>
+    </div>
+    
+
+  <div class="card-content">
+
+
+    <div class="form-group" style="max-width: 340px;">
+  <input
+    type="text"
+    class="form-input"
+    style="max-width: 320px;"
+    placeholder=" Search "
+    [(ngModel)]="searchText"
+  />🔍
+</div>
+
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Agent ID</th>
+          <th>Product</th>
+          <th>Version</th>
+          <th>Status</th>
+          <th>Timestamp</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of filteredStatuses()">
+          <td>{{ s.agentId }}</td>
+          <td>{{ s.product }}</td>
+          <td><span class="badge badge-version">{{ s.version }}</span></td>
+          <td>
+            <span [ngClass]="getStatusClass(s.status)">
+              {{ s.status }}
+            </span>
+          </td>
+          <td>{{ s.time }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+  </div>
+

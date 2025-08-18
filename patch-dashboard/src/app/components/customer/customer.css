@@ -1,0 +1,534 @@
+/* Modern Customer Management CSS */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.customer-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  transition: all 0.3s ease;
+}
+
+.customer-container:hover {
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* Main Customer Button */
+.customer-container > button {
+  background: linear-gradient(135deg, #06b6d4, #0891b2);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+  margin-bottom: 20px;
+}
+
+.customer-container > button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(6, 182, 212, 0.4);
+}
+
+.customer-container > button:active {
+  transform: translateY(0);
+}
+
+/* Options Buttons Container */
+.customer-container > div:first-of-type {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.customer-container > div:first-of-type button {
+  background: white;
+  color: #374151;
+  border: 2px solid #e5e7eb;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex: 1;
+  min-width: 150px;
+}
+
+.customer-container > div:first-of-type button:hover {
+  background: #f0f9ff;
+  border-color: #06b6d4;
+  color: #06b6d4;
+  transform: translateY(-1px);
+}
+
+.customer-container > div:first-of-type button:active {
+  background: #06b6d4;
+  color: white;
+  border-color: #06b6d4;
+}
+
+/* Section Headers */
+h2 {
+  color: #1f2937;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid #06b6d4;
+  position: relative;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(135deg, #06b6d4, #0891b2);
+  border-radius: 2px;
+}
+
+h3 {
+  color: #374151;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 20px 0 15px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+/* Table Styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  margin-top: 20px;
+}
+
+thead {
+  background: linear-gradient(135deg, #06b6d4, #0891b2);
+}
+
+thead th {
+  color: white;
+  padding: 18px 15px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+tbody tr {
+  transition: all 0.3s ease;
+  border-bottom: 1px solid #f1f5f9;
+  cursor: pointer;
+}
+
+tbody tr:hover {
+  background: linear-gradient(135deg, #f0f9ff, #e0f7fa);
+  transform: scale(1.01);
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.1);
+}
+
+tbody tr:last-child {
+  border-bottom: none;
+}
+
+tbody td {
+  padding: 15px;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 500;
+  vertical-align: top;
+}
+
+/* Product Lists in Table */
+tbody td ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+tbody td ul li {
+  background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+  padding: 6px 12px;
+  margin: 4px 0;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #0369a1;
+  border-left: 3px solid #06b6d4;
+}
+
+tbody td ul li:first-child {
+  margin-top: 0;
+}
+
+tbody td ul li:last-child {
+  margin-bottom: 0;
+}
+
+/* Customer Details Section */
+.customer-container > div p {
+  background: white;
+  padding: 15px 20px;
+  margin: 10px 0;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  font-size: 16px;
+  color: #374151;
+  border-left: 4px solid #06b6d4;
+}
+
+.customer-container > div p strong {
+  color: #1f2937;
+  font-weight: 600;
+}
+
+/* Product Lists in Details */
+.customer-container > div > div ul {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  list-style: none;
+  margin: 15px 0;
+}
+
+.customer-container > div > div ul li {
+  background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+  padding: 12px 16px;
+  margin: 8px 0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #0369a1;
+  border-left: 4px solid #06b6d4;
+  transition: all 0.3s ease;
+}
+
+.customer-container > div > div ul li:hover {
+  transform: translateX(5px);
+  box-shadow: 0 2px 8px rgba(6, 182, 212, 0.2);
+}
+
+/* Back to List Button */
+.customer-container button:not([type="submit"]):not(.customer-container > button):not(.customer-container > div:first-of-type button):not(.add-product-btn):not(.remove-btn):not(.cancel-btn) {
+  background: linear-gradient(135deg, #64748b, #475569);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(100, 116, 139, 0.3);
+  margin-top: 20px;
+}
+
+.customer-container button:not([type="submit"]):not(.customer-container > button):not(.customer-container > div:first-of-type button):not(.add-product-btn):not(.remove-btn):not(.cancel-btn):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(100, 116, 139, 0.4);
+}
+
+/* Enhanced Form Styles */
+form {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  margin-top: 20px;
+}
+
+.form-section {
+  margin-bottom: 30px;
+  padding: 25px;
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.form-section h3 {
+  color: #1f2937;
+  font-size: 18px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #06b6d4;
+  padding-bottom: 8px;
+}
+
+.section-description {
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+/* Basic form fields grid */
+.form-section:first-child {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+.form-section:first-child h3,
+.form-section:first-child .section-description {
+  grid-column: 1 / -1;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  color: #374151;
+  font-weight: 500;
+  font-size: 14px;
+  gap: 8px;
+}
+
+input, select {
+  padding: 12px 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #06b6d4;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+}
+
+input:hover, select:hover {
+  border-color: #9ca3af;
+}
+
+input:required, select:required {
+  border-left: 4px solid #06b6d4;
+}
+
+/* Products Container Styles */
+.products-container {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.product-row {
+  display: flex;
+  align-items: end;
+  gap: 15px;
+  margin-bottom: 15px;
+  padding: 15px;
+  background: linear-gradient(135deg, #f0f9ff, #e0f7fa);
+  border-radius: 8px;
+  border-left: 4px solid #06b6d4;
+}
+
+.product-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  flex: 1;
+}
+
+.product-actions {
+  display: flex;
+  align-items: center;
+}
+
+.remove-btn {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+  border: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remove-btn:hover:not(:disabled) {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.remove-btn:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.add-product-btn {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.add-product-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
+}
+
+/* Form Actions */
+.form-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 2px solid #e5e7eb;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  min-width: 150px;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+}
+
+.cancel-btn {
+  background: linear-gradient(135deg, #6b7280, #4b5563);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(107, 114, 128, 0.3);
+  min-width: 150px;
+}
+
+.cancel-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(107, 114, 128, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .product-fields {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-section:first-child {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .customer-container {
+    padding: 20px;
+    margin: 10px;
+  }
+  
+  .product-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .product-actions {
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .submit-btn, .cancel-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+  
+  .customer-container {
+    padding: 15px;
+  }
+  
+  .form-section {
+    padding: 15px;
+  }
+  
+  .product-row {
+    padding: 10px;
+  }
+  
+  .products-container {
+    padding: 15px;
+  }
+}
+
+/* Animation for view transitions */
+.customer-container > div {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
